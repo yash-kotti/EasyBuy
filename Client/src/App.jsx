@@ -6,11 +6,13 @@ import Test from "./Components/Test";
 import Footer from "./Components/Footer";
 import ItemList from "./Components/ItemList";
 import data from "./data/data.json";
+import Cart from "./Components/Cart";
 function App() {
   const dataArr = data;
   return (
     <>
       <Header></Header>
+      <Cart />
       <ItemList dataArr={dataArr}></ItemList>
       <Footer></Footer>
     </>

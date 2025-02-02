@@ -4,8 +4,8 @@ const ItemList = ({ dataArr }) => {
   return (
     <>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {dataArr.map((item) => (
-          <Item item={item}></Item>
+        {dataArr.map((item, index) => (
+          <Item key={index} item={item}></Item>
         ))}
       </div>
     </>

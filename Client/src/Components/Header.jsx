@@ -1,6 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
+import { toggleCart } from "../Store/features/cart/showCart";
+
 const Header = () => {
-  const handleClick = () => {
-    console.log("YAsh");
+  const cart = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const handleCartClick = () => {
+    console.log("Clicked");
+    dispatch(toggleCart());
   };
   return (
     <>
@@ -64,18 +70,22 @@ const Header = () => {
               <input
                 className="form-control me-2"
                 type="search"
-                placeholder="Search By SKU or Name"
+                placeholder="Search (by SKU/Name)"
                 aria-label="Search"
               />
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
             </form>
-            <button type="button" class="btn btn-primary position-relative">
-              Inbox
-              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                99+
-                <span class="visually-hidden">unread messages</span>
+            <button
+              type="button"
+              className="btn btn-primary position-relative"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasCart"
+            >
+              Cart
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {cart.items.length || ""}
               </span>
             </button>
           </div>
