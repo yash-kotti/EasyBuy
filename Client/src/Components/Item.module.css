@@ -1,0 +1,11 @@
+.truncated-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limit to 3 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  cursor: pointer; /* Show pointer to indicate tooltip */
+  line-clamp: 3;
+  box-orient: vertical;
+}

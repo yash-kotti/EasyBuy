@@ -5,7 +5,7 @@ import { removeAllItems } from "../Store/features/cart/cartSlice";
 const Cart = () => {
   const items = useSelector((state) => state.cart.items);
   const total = useSelector((state) => state.cart.totalPrice);
-  // console.log(items);
+
   const dispatch = useDispatch();
   const handleCheckOut = () => {
     dispatch(removeAllItems());
@@ -19,7 +19,7 @@ const Cart = () => {
     >
       <div className="order-md-last">
         <h4 className="d-flex justify-content-between align-items-center mb-3">
-          <span className="text-primary">Shopping cart</span>
+          <span className="text-primary">Your shopping cart</span>
           <span className="badge bg-primary rounded-pill">{items.length}</span>
         </h4>
         {items.length > 0 ? (

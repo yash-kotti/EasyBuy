@@ -1,8 +1,29 @@
 import { useDispatch, useSelector } from "react-redux";
-import { toggleCart } from "../Store/features/cart/showCart";
+import { useRef, useState } from "react";
+import { searchProducts } from "../Store/features/product/productThunks";
+import { updateSearchValue } from "../Store/features/search/search";
 
 const Header = () => {
   const cart = useSelector((state) => state.cart);
+  const searchRef = useRef("");
+  const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleSearchClicked = async (e) => {
+    e.preventDefault();
+    const searchValue = searchRef.current.value;
+    // console.log(searchValue);
+    dispatch(updateSearchValue(searchValue));
+    dispatch(searchProducts(searchValue));
+  };
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+    if (e.target.value === "") {
+      handleSearchClicked(e);
+    }
+  };
+
   return (
     <>
       <nav
@@ -68,14 +89,21 @@ const Header = () => {
                 </ul>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <form
+              className="d-flex"
+              role="search"
+              onSubmit={handleSearchClicked}
+            >
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search (by SKU/Name)"
                 aria-label="Search"
+                ref={searchRef}
+                value={searchTerm}
+                onInput={handleInputChange} // Detect (X) button click
               />
-              <button className="btn btn-outline-success" type="submit">
+              <button className="btn btn-outline-primary me-2" type="submit">
                 Search
               </button>
             </form>

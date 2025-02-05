@@ -16,9 +16,9 @@ const CartProduct = ({ item }) => {
           <h6>yash</h6>
         </div>
         <div>
-          <h6 className="my-0">{item["Handle"]}</h6>
+          <h6 className="my-0">{item.handle}</h6>
           <small className="text-body-secondary">
-            {item.quantity} x ${item["Variant Price"]}
+            {item.quantity} x ${item.variantPrice}
           </small>
         </div>
         <span className="text-body-secondary">

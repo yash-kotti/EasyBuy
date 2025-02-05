@@ -5,27 +5,27 @@ export const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       const existingItem = state.items.find(
-        (item) => item.Handle === action.payload.Handle
+        (item) => item.handle === action.payload.handle
       );
       existingItem
         ? existingItem.quantity++
         : state.items.push({ ...action.payload, quantity: 1 });
-      state.totalPrice += action.payload["Variant Price"];
+      state.totalPrice += action.payload.variantPrice;
     },
 
     removeItem: (state, action) => {
       const existingItem = state.items.find(
-        (item) => item.Handle === action.payload.Handle
+        (item) => item.handle === action.payload.handle
       );
       if (!existingItem) return;
 
       existingItem.quantity > 1
         ? existingItem.quantity--
         : (state.items = state.items.filter(
-            (item) => item.Handle !== action.payload.Handle
+            (item) => item.handle !== action.payload.handle
           ));
 
-      state.totalPrice -= action.payload["Variant Price"];
+      state.totalPrice -= action.payload.variantPrice;
     },
     removeAllItems: (state, action) => {
       console.log("removed");

@@ -3,7 +3,7 @@ export const showCartSlice = createSlice({
   name: "showCart",
   initialState: false,
   reducers: {
-    toggleCart: (state, action) => {
+    toggleCart: (state) => {
       return !state;
     },
   },
