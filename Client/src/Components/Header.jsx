@@ -84,8 +84,9 @@ const Header = () => {
         <div className="container-fluid">
           <a
             className="navbar-brand"
-            href="#"
+            href="#!"
             onClick={(e) => {
+              window.scrollTo(0, 0);
               handleSearchClicked(e);
             }}
           >

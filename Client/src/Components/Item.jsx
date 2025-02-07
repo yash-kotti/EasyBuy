@@ -7,18 +7,18 @@ import { Toast } from "bootstrap";
 
 const Item = ({ item }) => {
   const dispatch = useDispatch();
-  // const toastRef = useRef(null);
+  const toastRef = useRef(null);
 
-  // useEffect(() => {
-  //   // Initialize toast
-  //   const toast = new Toast(toastRef.current);
-  //   toastRef.current.toast = toast;
-  // }, []);
+  useEffect(() => {
+    // Initialize toast
+    const toast = new Toast(toastRef.current);
+    toastRef.current.toast = toast;
+  }, []);
 
   const handleAddToCart = () => {
     dispatch(addItem(item));
     // Show toast
-    // toastRef.current.toast.show();
+    toastRef.current.toast.show();
   };
 
   return (
@@ -78,7 +78,7 @@ const Item = ({ item }) => {
         </div>
       </div>
 
-      {/* <div className="toast-container position-fixed top-1 start-50 translate-middle p-3">
+      <div className="toast-container position-fixed top-1 start-50 translate-middle p-3">
         <div
           ref={toastRef}
           className="toast align-items-center text-bg-success border-0"
@@ -98,7 +98,7 @@ const Item = ({ item }) => {
             ></button>
           </div>
         </div>
-      </div> */}
+      </div>
     </>
   );
 };

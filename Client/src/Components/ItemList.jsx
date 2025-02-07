@@ -126,7 +126,9 @@ const ItemList = () => {
           <li className={`page-item ${currPage === 1 ? "disabled" : ""}`}>
             <a
               className="page-link"
-              onClick={handlePreviousButtonClicked}
+              onClick={() => {
+                handlePreviousButtonClicked();
+              }}
               href="#"
             >
               Previous
@@ -156,7 +158,7 @@ const ItemList = () => {
             <a
               className="page-link"
               onClick={() => {
-                handleNextButtonClicked;
+                handleNextButtonClicked();
               }}
               href="#"
             >

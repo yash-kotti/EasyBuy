@@ -7,20 +7,25 @@ import { Toast } from "bootstrap";
 
 const CartProduct = ({ item }) => {
   const dispatch = useDispatch();
-  // const toastRef = useRef(null);
+  const toastRef = useRef(null);
 
-  // useEffect(() => {
-  //   const toast = new Toast(toastRef.current);
-  //   toastRef.current.toast = toast;
-  // }, []);
+  useEffect(() => {
+    const toast = new Toast(toastRef.current);
+    toastRef.current.toast = toast;
+  }, []);
 
   const handleDeleteCartClick = () => {
-    dispatch(removeItem(item));
-    // toastRef.current.toast.show();
+    // Show toast first
+    toastRef.current.toast.show();
+
+    // Remove item after a brief delay
+    setTimeout(() => {
+      dispatch(removeItem(item));
+    }, 400);
   };
 
   return (
-    <>
+    <div className="position-relative">
       <li className="list-group-item d-flex justify-content-between align-items-center py-3">
         <div className="d-flex align-items-center" style={{ width: "70%" }}>
           <div className="me-3">
@@ -59,7 +64,10 @@ const CartProduct = ({ item }) => {
         />
       </li>
 
-      {/* <div className="toast-container position-fixed top-1 start-50 translate-middle p-3">
+      <div
+        className="toast-container position-fixed top-0 start-50 translate-middle-x p-3"
+        style={{ zIndex: 1500 }}
+      >
         <div
           ref={toastRef}
           className="toast align-items-center text-bg-danger border-0"
@@ -79,9 +87,8 @@ const CartProduct = ({ item }) => {
             ></button>
           </div>
         </div>
-      </div> */}
-    </>
+      </div>
+    </div>
   );
 };
-
 export default CartProduct;
