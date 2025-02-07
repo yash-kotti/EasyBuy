@@ -14,7 +14,7 @@ const productSlice = createSlice({
   reducers: {
     // Add the setSelectedCategories action
     setSelectedCategories: (state, action) => {
-      console.log("Set Selected Categories Action", action);
+      // console.log("Set Selected Categories Action", action);
       if (Array.isArray(action.payload)) {
         state.selectedCategories = action.payload;
       }

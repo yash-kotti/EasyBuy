@@ -28,7 +28,7 @@ export const cartSlice = createSlice({
       state.totalPrice -= action.payload.variantPrice;
     },
     removeAllItems: (state, action) => {
-      console.log("removed");
+      // console.log("removed");
       state.items = [];
     },
   },
