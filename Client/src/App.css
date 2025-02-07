@@ -14,3 +14,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 body, p, .btn, input {
   font-family: var(--body-font);
 }
+.cursor-pointer {
+  cursor: pointer !important;
+}

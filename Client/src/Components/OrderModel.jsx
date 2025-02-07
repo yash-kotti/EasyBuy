@@ -3,10 +3,8 @@ const OrderModel = () => {
     <div
       className="modal fade"
       id="orderModal"
-      tabIndex="-1"
       aria-labelledby="orderModalLabel"
-      aria-modal="true"
-      role="dialog"
+      aria-hidden="true"
       data-bs-focus="false"
     >
       <div className="modal-dialog modal-dialog-centered">
@@ -33,6 +31,7 @@ const OrderModel = () => {
               type="button"
               className="btn btn-success w-100"
               data-bs-dismiss="modal"
+              autoFocus
             >
               Close
             </button>
@@ -42,5 +41,4 @@ const OrderModel = () => {
     </div>
   );
 };
-
 export default OrderModel;

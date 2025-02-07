@@ -110,7 +110,7 @@ const Header = () => {
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="true"
+                  aria-expanded="false"
                 >
                   Categories
                 </a>
@@ -119,9 +119,10 @@ const Header = () => {
                   style={{
                     maxHeight: "300px",
                     overflowY: "auto",
-                    width: "250px", // Wider dropdown
+                    width: "250px",
                     padding: "10px 0",
                   }}
+                  data-bs-auto-close="outside"
                 >
                   {categories.map((category) => (
                     <li key={category} className="px-3 py-1">
