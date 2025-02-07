@@ -25,7 +25,7 @@ const Header = () => {
       searchValue: searchValue,
       category: selectedCategories, // This can be updated based on selected categories
     };
-    console.log("Req Obj Search:", reqObj);
+    // console.log("Req Obj Search:", reqObj);
     dispatch(updateSearchValue(searchValue));
     dispatch(setCurrentPage(1));
     dispatch(searchProducts(reqObj));
@@ -53,7 +53,7 @@ const Header = () => {
   // Handle category checkbox change
   const handleCheckboxChange = (category) => {
     // Log the current selected categories for debugging
-    console.log("Selected Categories before update: ", selectedCategories);
+    // console.log("Selected Categories before update: ", selectedCategories);
 
     const updatedCategories = selectedCategories.includes(category)
       ? selectedCategories.filter((c) => c !== category)

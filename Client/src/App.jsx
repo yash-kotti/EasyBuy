@@ -22,7 +22,7 @@ function App() {
       (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
     );
 
-    console.log("Bootstrap Loaded:", typeof bootstrap !== "undefined");
+    // console.log("Bootstrap Loaded:", typeof bootstrap !== "undefined");
   }, []);
   return (
     <>

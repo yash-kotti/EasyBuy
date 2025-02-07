@@ -3,7 +3,7 @@ const Product = require("../models/productModel");
 // Get all products with pagination & category filtering
 const getProducts = async (req, res) => {
   try {
-    console.log("Get Products Query Params:", req.query);
+    // console.log("Get Products Query Params:", req.query);
     const { page = 1, limit = 24, category } = req.query;
 
     // Convert page and limit to numbers (as they come as strings from query params)
@@ -36,7 +36,7 @@ const getProducts = async (req, res) => {
 };
 const searchProducts = async (req, res) => {
   try {
-    console.log("Search Products Query Params:", req.query);
+    // console.log("Search Products Query Params:", req.query);
     const { query, page = 1, limit = 24, category } = req.query;
 
     // Convert page and limit to numbers (as they come as strings from query params)
@@ -68,7 +68,7 @@ const searchProducts = async (req, res) => {
       searchQuery.type = { $in: categoriesArray }; // Match multiple categories
     }
 
-    console.log("Search Query ", JSON.stringify(searchQuery));
+    // console.log("Search Query ", JSON.stringify(searchQuery));
 
     // Get total count of matching products
     const totalProducts = await Product.countDocuments(searchQuery);
