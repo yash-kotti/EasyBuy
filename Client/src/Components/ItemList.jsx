@@ -5,27 +5,30 @@ import {
   fetchProducts,
   searchProducts,
 } from "../Store/features/product/productThunks";
+import ItemPlaceholder from "./ItemPlaceholder";
+import { setCurrentPage } from "../Store/features/product/product";
 
 const ItemList = () => {
   const dispatch = useDispatch();
-  const [currPage, setCurrPage] = useState(1);
+  // const [currPage, setCurrPage] = useState(1);
+  const currPage = useSelector((state) => state.product.currentPage);
   const { productsList, totalPages } = useSelector((state) => state.product);
   const [loading, setLoading] = useState(false);
   const { searchValue } = useSelector((state) => state.searchProduct);
-
+  const { selectedCategories } = useSelector((state) => state.product);
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
         const reqObj = {
           page: currPage,
-          seachValue: searchValue,
-          category: "",
+          searchValue: searchValue,
+          category: selectedCategories,
         };
         if (searchValue != "") {
           await dispatch(searchProducts(reqObj));
         } else {
-          await dispatch(fetchProducts(reqObj));
+          await dispatch(searchProducts(reqObj));
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -39,18 +42,21 @@ const ItemList = () => {
 
   const handlePageClick = (pageNo) => {
     if (pageNo < 1 || pageNo > totalPages) return;
-    setCurrPage(pageNo);
+    // setCurrPage(pageNo);
+    dispatch(setCurrentPage(pageNo));
   };
 
   const handleNextButtonClicked = () => {
     if (currPage < totalPages) {
-      setCurrPage(currPage + 1);
+      // setCurrPage(currPage + 1);
+      dispatch(setCurrentPage(currPage + 1));
     }
   };
 
   const handlePreviousButtonClicked = () => {
     if (currPage > 1) {
-      setCurrPage(currPage - 1);
+      // setCurrPage(currPage - 1);
+      dispatch(setCurrentPage(currPage - 1));
     }
   };
 
@@ -91,6 +97,15 @@ const ItemList = () => {
 
     return Array.from(pages);
   };
+  if (loading) {
+    return (
+      <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {[...Array(8)].map((_, index) => (
+          <ItemPlaceholder key={index} />
+        ))}
+      </div>
+    );
+  }
   if (productsList.length === 0) {
     return (
       <div className="text-body-secondary text-center">No products found</div>
@@ -100,11 +115,9 @@ const ItemList = () => {
     <div>
       {/* Product List */}
       <div style={{ display: "flex", flexWrap: "wrap" }}>
-        {loading ? (
-          <p>Loading products...</p>
-        ) : (
-          productsList.map((item, index) => <Item key={index} item={item} />)
-        )}
+        {productsList.map((item, index) => (
+          <Item key={index} item={item} />
+        ))}
       </div>
 
       {/* Pagination */}
@@ -140,7 +153,13 @@ const ItemList = () => {
           <li
             className={`page-item ${currPage === totalPages ? "disabled" : ""}`}
           >
-            <a className="page-link" onClick={handleNextButtonClicked} href="#">
+            <a
+              className="page-link"
+              onClick={() => {
+                handleNextButtonClicked;
+              }}
+              href="#"
+            >
               Next
             </a>
           </li>

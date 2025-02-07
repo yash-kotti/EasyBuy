@@ -2,19 +2,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRef, useState } from "react";
 import { searchProducts } from "../Store/features/product/productThunks";
 import { updateSearchValue } from "../Store/features/search/search";
+import {
+  setCurrentPage,
+  setSelectedCategories,
+} from "../Store/features/product/product"; // Import the action for setting categories
 
 const Header = () => {
   const cart = useSelector((state) => state.cart);
   const searchRef = useRef("");
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
+  const selectedCategories = useSelector(
+    (state) => state.product.selectedCategories
+  );
+  // const currentPage = useSelector((state) => state.product.currentPage);
 
   const handleSearchClicked = async (e) => {
     e.preventDefault();
     const searchValue = searchRef.current.value;
-    // console.log(searchValue);
+    const reqObj = {
+      page: 1,
+      searchValue: searchValue,
+      category: selectedCategories, // This can be updated based on selected categories
+    };
+    console.log("Req Obj Search:", reqObj);
     dispatch(updateSearchValue(searchValue));
-    dispatch(searchProducts(searchValue));
+    dispatch(setCurrentPage(1));
+    dispatch(searchProducts(reqObj));
   };
 
   const handleInputChange = (e) => {
@@ -22,6 +36,38 @@ const Header = () => {
     if (e.target.value === "") {
       handleSearchClicked(e);
     }
+  };
+
+  const categories = [
+    "Hoodies",
+    "Children's T-Shirts",
+    "T-shirts",
+    "Tops",
+    "Dresses",
+    "Footwear",
+    "Skirts",
+    "Accessories",
+    "Bikinis",
+  ];
+
+  // Handle category checkbox change
+  const handleCheckboxChange = (category) => {
+    // Log the current selected categories for debugging
+    console.log("Selected Categories before update: ", selectedCategories);
+
+    const updatedCategories = selectedCategories.includes(category)
+      ? selectedCategories.filter((c) => c !== category)
+      : [...selectedCategories, category];
+
+    dispatch(setSelectedCategories(updatedCategories));
+
+    const reqObj = {
+      page: 1,
+      searchValue: searchTerm,
+      category: updatedCategories, // Pass the array directly
+    };
+    dispatch(setCurrentPage(1));
+    dispatch(searchProducts(reqObj));
   };
 
   return (
@@ -32,10 +78,17 @@ const Header = () => {
           top: "0",
           zIndex: "1000",
           backgroundColor: "#fff",
+          boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
         }}
       >
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a
+            className="navbar-brand"
+            href="#"
+            onClick={(e) => {
+              handleSearchClicked(e);
+            }}
+          >
             EasyBuy
           </a>
           <button
@@ -51,41 +104,49 @@ const Header = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
-              </li>
-
               <li className="nav-item dropdown">
                 <a
                   className="nav-link dropdown-toggle"
                   href="#"
                   role="button"
                   data-bs-toggle="dropdown"
-                  aria-expanded="false"
+                  aria-expanded="true"
                 >
-                  Category
+                  Categories
                 </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Accessories
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      T-shirts
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
+                <ul
+                  className="dropdown-menu"
+                  style={{
+                    maxHeight: "300px",
+                    overflowY: "auto",
+                    width: "250px", // Wider dropdown
+                    padding: "10px 0",
+                  }}
+                >
+                  {categories.map((category) => (
+                    <li key={category} className="px-3 py-1">
+                      <div
+                        className="form-check cursor-pointer"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <input
+                          className="form-check-input cursor-pointer"
+                          type="checkbox"
+                          id={`check-${category}`}
+                          name={category}
+                          value={category}
+                          checked={selectedCategories.includes(category)}
+                          onChange={() => handleCheckboxChange(category)}
+                        />
+                        <label
+                          className="form-check-label cursor-pointer"
+                          htmlFor={`check-${category}`}
+                        >
+                          {category}
+                        </label>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </li>
             </ul>

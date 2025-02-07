@@ -1,0 +1,16 @@
+/* Import the fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap');
+
+/* Apply to your elements */
+:root {
+  --heading-font: 'Poppins', sans-serif;
+  --body-font: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: var(--heading-font);
+}
+
+body, p, .btn, input {
+  font-family: var(--body-font);
+}

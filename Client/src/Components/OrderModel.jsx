@@ -5,7 +5,8 @@ const OrderModel = () => {
       id="orderModal"
       tabIndex="-1"
       aria-labelledby="orderModalLabel"
-      aria-hidden="true"
+      aria-modal="true"
+      role="dialog"
       data-bs-focus="false"
     >
       <div className="modal-dialog modal-dialog-centered">

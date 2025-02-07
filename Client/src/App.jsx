@@ -7,7 +7,6 @@ import Footer from "./Components/Footer";
 import ItemList from "./Components/ItemList";
 import Cart from "./Components/Cart";
 import OrderModel from "./Components/OrderModel";
-import Pagination from "./Components/Pagination";
 import Test2 from "./Components/Test2";
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
       <Cart />
       <ItemList></ItemList>
       <OrderModel />
-      {/* <Pagination /> */}
       <Footer></Footer>
     </>
   );
