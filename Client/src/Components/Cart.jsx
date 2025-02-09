@@ -32,6 +32,13 @@ const Cart = () => {
       <div className="d-flex flex-column h-100">
         <div className="p-4">
           <h4 className="d-flex justify-content-between align-items-center mb-4">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+              style={{ transform: "scale(0.8)" }}
+            ></button>
             <span className="text-primary fw-bold">Your shopping cart</span>
             <span className="badge bg-primary rounded-pill">
               {items.length}
